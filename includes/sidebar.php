@@ -13,7 +13,7 @@
 
     <ul class="sidebar-menu">
         <li class="sidebar-item">
-            <a href="?view=sku" class="sidebar-link<?php if ($activeView === 'sku' || $activeView === 'create-sku') echo '-active'; ?>">
+            <a href="?view=sku" class="sidebar-link<?php if ($activeView === 'sku' || $activeView === 'create-sku' || $activeView === 'edit-sku') echo '-active'; ?>">
                 <svg class="sidebar-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_9_207" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect width="24" height="24" fill="#D9D9D9"/></mask><g mask="url(#mask0_9_207)"><path d="M1.25 20.75V16.25H2.75V19.25H5.75V20.75H1.25ZM18.25 20.75V19.25H21.25V16.25H22.75V20.75H18.25ZM4 18V6H6V18H4ZM7 18V6H8V18H7ZM10 18V6H12V18H10ZM13 18V6H16V18H13ZM17 18V6H18V18H17ZM19 18V6H20V18H19ZM1.25 7.75V3.25H5.75V4.75H2.75V7.75H1.25ZM21.25 7.75V4.75H18.25V3.25H22.75V7.75H21.25Z"/></g>
                 </svg>SKU

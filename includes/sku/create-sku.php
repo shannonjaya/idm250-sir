@@ -1,5 +1,5 @@
 <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") { 
         $ficha = $_POST['ficha'] ?? "";
         $sku = $_POST['sku'] ?? "";
         $description = $_POST['description'] ?? "";
@@ -13,10 +13,9 @@
         $rate = $_POST['rate'] ?? 0.0;
 
     $stmt = $connection->prepare("INSERT INTO idm250_sku (ficha, sku, description, uom_primary, piece_count, length_inches, width_inches, height_inches, weight_lbs, assembly, rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
     $stmt->bind_param("ssssiidddsi", $ficha, $sku, $description, $uom, $pieces, $length, $width, $height, $weight, $assembly, $rate);
-
     $stmt->execute();
+    $stmt->close();
 
     header("Location: ../idm250-sir/index.php?view=sku");
     exit;
