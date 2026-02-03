@@ -68,14 +68,16 @@
     }
 ?>
 
+
 <header class="main-header">
-    <h1 class="main-heading">Edit SKU</h1>
+        <h1 class="main-heading">Edit SKU</h1>
 </header>
 
 <form method="post">
     <input type="hidden" name="id" value="<?php echo $id; ?>">
 
-    <div class="row">
+    <fieldset class="row">
+        <legend>SKU Details</legend>
         <div class="form-item">
             <label for="ficha">Ficha</label>
             <input type="number" min="0" id="ficha" name="ficha"  value="<?php echo $ficha; ?>" placeholder="000" required>
@@ -84,30 +86,36 @@
             <label for="sku">SKU</label>
             <input type="text" min="0" id="sku" name="sku"  value="<?php echo $sku; ?>" placeholder="0000000-0000" required>
         </div>
-    </div>
-        
-    <div class="row">
+    </fieldset>
+            
+    <fieldset class="row">
+        <legend>Description</legend>
         <div class="form-item">
             <label for="description">Description</label>
             <textarea id="description" maxlength="100" name="description" placeholder="Description" required><?php echo $description; ?></textarea>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="row">
+    <fieldset class="row">
+        <legend>Packaging</legend>
         <div class="form-item">
             <label for="uom">UOM</label>
-            <input type="text" id="uom" name="uom" value="<?php echo $uom; ?>" placeholder="Unit of Measure" required>
+            <select id="uom" name="uom" required>
+                <option value="PALLET" <?php if ($uom === "PALLET") { echo 'selected'; } ?>>PALLET</option>
+                <option value="BUNDLE" <?php if ($uom === "BUNDLE") { echo 'selected'; } ?>>BUNDLE</option>
+            </select>
         </div>
         <div class="form-item">
             <label for="pieces">Pieces</label>
             <input type="number" min="0" id="pieces" name="pieces" value="<?php echo $pieces; ?>" placeholder="0" required>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="row">
+    <fieldset class="row">
+        <legend>Dimensions</legend>
         <div class="form-item">
             <label for="length">Length (inches)</label>
-        <input type="number" min="0" step="0.01" id="length" name="length" value="<?php echo $length; ?>" placeholder="0.00" required>
+            <input type="number" min="0" step="0.01" id="length" name="length" value="<?php echo $length; ?>" placeholder="0.00" required>
         </div>
         <div class="form-item">
             <label for="width">Width (inches)</label>
@@ -121,9 +129,10 @@
             <label for="weight">Weight (lbs)</label>
             <input type="number" min="0" step="0.01" id="weight" name="weight" value="<?php echo $weight; ?>" placeholder="0.00" required>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="row">
+    <fieldset class="row">
+        <legend>Assembly & Rate</legend>
         <div class="form-item">
             <label for="assembly">Assembly</label>
             <select id="assembly" name="assembly" required>
@@ -133,9 +142,9 @@
         </div>
         <div class="form-item">
             <label for="rate">Rate</label>
-            <input type="number" min="0" step="0.01" id="rate" name="rate" value="<?php echo $rate; ?>" placeholder="0.00"required>
+            <input type="number" min="0" step="0.01" id="rate" name="rate" value="<?php echo $rate; ?>" placeholder="0.00" required>
         </div>
-    </div>
+    </fieldset>
 
     <div class="btn-wrapper"><button type="submit" class="primary-btn">Edit SKU</button></div>
 </form>
