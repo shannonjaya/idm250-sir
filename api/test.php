@@ -25,6 +25,7 @@ if ($method === 'GET') { // get sku by id
 
     $result = $stmt->get_result(); // get the result of executing
     $sku = $result->fetch_assoc(); // the result stored as an associative array
+    $stmt->close();
 
     if ($sku) {
         echo json_encode(['success' => true, 'data' => $sku]); //send it back

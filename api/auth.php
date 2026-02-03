@@ -12,7 +12,7 @@
         }
         if ($provided_key !== $valid_api_key) {
             http_response_code(401);
-            echo json_encode(['error' => 'Unauthorized:', 'details' => 'Invalid API Key']);
+            echo json_encode(['error' => 'Unauthorized', 'details' => 'Invalid API Key']);
             exit();
         }
     }
