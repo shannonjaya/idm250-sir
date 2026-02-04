@@ -75,19 +75,5 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="form-item">
-            <label for="assembly">Assembly</label>
-            <select id="assembly" name="assembly" required>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        </div>
-        <div class="form-item">
-            <label for="rate">Rate</label>
-            <input type="number" min="0" step="0.01" id="rate" name="rate" placeholder="0.00"required>
-        </div>
-    </div>
-
     <div class="btn-wrapper"><button type="submit" class="primary-btn">Create SKU</button></div>
 </form>
