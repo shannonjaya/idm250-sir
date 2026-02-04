@@ -1,5 +1,5 @@
 <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ficha = $_POST['ficha'] ?? "";
         $sku = $_POST['sku'] ?? "";
         $description = $_POST['description'] ?? "";
@@ -79,21 +79,6 @@
         <div class="form-item">
             <label for="weight">Weight (lbs)</label>
             <input type="number" min="0" step="0.01" id="weight" name="weight" placeholder="0.00" required>
-        </div>
-    </fieldset>
-
-    <fieldset class="row">
-        <legend>Assembly & Rate</legend>
-        <div class="form-item">
-            <label for="assembly">Assembly</label>
-            <select id="assembly" name="assembly" required>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        </div>
-        <div class="form-item">
-            <label for="rate">Rate</label>
-            <input type="number" min="0" step="0.01" id="rate" name="rate" placeholder="0.00" required>
         </div>
     </fieldset>
 

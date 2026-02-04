@@ -12,7 +12,7 @@
     $assembly = "";
     $rate = "";
 
-    if ($_SERVER["REQUEST_METHOD"] == "GET"){ 
+    if ($_SERVER["REQUEST_METHOD"] == "GET"){
         if(!isset($_GET['id'])) {
             header("Location: ../idm250-sir/index.php?view=sku");
             exit;
@@ -44,14 +44,14 @@
         $assembly = $row['assembly'];
         $rate = $row['rate'];
     }
-    if ($_SERVER["REQUEST_METHOD"] == "POST"){ 
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $id = $_POST['id'];
         $ficha = $_POST['ficha'] ?? "";
         $sku = $_POST['sku'] ?? "";
         $description = $_POST['description'] ?? "";
         $uom = $_POST['uom'] ?? "";
         $pieces = $_POST['pieces'] ?? 0;
-        $length = $_POST['length'] ?? 0.0;  
+        $length = $_POST['length'] ?? 0.0;
         $width = $_POST['width'] ?? 0.0;
         $height = $_POST['height'] ?? 0.0;
         $weight = $_POST['weight'] ?? 0.0;
@@ -128,21 +128,6 @@
         <div class="form-item">
             <label for="weight">Weight (lbs)</label>
             <input type="number" min="0" step="0.01" id="weight" name="weight" value="<?php echo $weight; ?>" placeholder="0.00" required>
-        </div>
-    </fieldset>
-
-    <fieldset class="row">
-        <legend>Assembly & Rate</legend>
-        <div class="form-item">
-            <label for="assembly">Assembly</label>
-            <select id="assembly" name="assembly" required>
-                <option value="1" <?php if ((int)$assembly === 1) echo 'selected'; ?>>Yes</option>
-                <option value="0" <?php if ((int)$assembly === 0) echo 'selected'; ?>>No</option>
-            </select>
-        </div>
-        <div class="form-item">
-            <label for="rate">Rate</label>
-            <input type="number" min="0" step="0.01" id="rate" name="rate" value="<?php echo $rate; ?>" placeholder="0.00" required>
         </div>
     </fieldset>
 
