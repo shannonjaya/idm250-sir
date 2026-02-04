@@ -31,8 +31,6 @@
                 <td><?php echo htmlspecialchars($row['piece_count']); ?></td>
                 <td><?php echo htmlspecialchars($row['length_inches']) . " x " . htmlspecialchars($row['width_inches']) . " x " . htmlspecialchars($row['height_inches']); ?></td>
                 <td><?php echo htmlspecialchars($row['weight_lbs']); ?></td>
-
-
                 <td class="col-actions">
                         <a href="?view=edit-sku&id=<?php echo $row['id']; ?>" class="icon-btn">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

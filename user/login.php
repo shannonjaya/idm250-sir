@@ -1,5 +1,5 @@
 <?php
-require_once 'auth.php';
+require_once '../lib/user-auth.php';
 
 $error = null;
 
@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $password = $_POST['password'] ?? '';
 
   if (login_user($email, $password)) {
-    header('Location: ../idm250-sir/index.php?view=sku');
+    header('Location: ../index.php?view=sku');
     exit;
   } else {
     $error = 'Invalid email or password';
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
   <main class="main-content" style="margin-left:0; max-width:400px;">

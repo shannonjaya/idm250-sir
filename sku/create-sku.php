@@ -1,5 +1,5 @@
 <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ficha = $_POST['ficha'] ?? "";
         $sku = $_POST['sku'] ?? "";
         $description = $_POST['description'] ?? "";
@@ -27,7 +27,8 @@
 </header>
 
 <form method="post">
-    <div class="row">
+    <fieldset class="row">
+        <legend>SKU Details</legend>
         <div class="form-item">
             <label for="ficha">Ficha</label>
             <input type="number" min="0" id="ficha" name="ficha" placeholder="000" required>
@@ -36,30 +37,36 @@
             <label for="sku">SKU</label>
             <input type="text" min="0" id="sku" name="sku" placeholder="0000000-0000" required>
         </div>
-    </div>
-        
-    <div class="row">
+    </fieldset>
+
+    <fieldset class="row">
+        <legend>Description</legend>
         <div class="form-item">
             <label for="description">Description</label>
             <textarea id="description" maxlength="100" name="description" placeholder="Description" required></textarea>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="row">
+    <fieldset class="row">
+        <legend>Packaging</legend>
         <div class="form-item">
             <label for="uom">UOM</label>
-            <input type="text" id="uom" name="uom" placeholder="Unit of Measure" required>
+            <select id="uom" name="uom" required>
+                <option value="PALLET">PALLET</option>
+                <option value="BUNDLE">BUNDLE</option>
+            </select>
         </div>
         <div class="form-item">
             <label for="pieces">Pieces</label>
             <input type="number" min="0" id="pieces" name="pieces" placeholder="0" required>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="row">
+    <fieldset class="row">
+        <legend>Dimensions</legend>
         <div class="form-item">
             <label for="length">Length (inches)</label>
-        <input type="number" min="0" step="0.01" id="length" name="length" placeholder="0.00" required>
+            <input type="number" min="0" step="0.01" id="length" name="length" placeholder="0.00" required>
         </div>
         <div class="form-item">
             <label for="width">Width (inches)</label>
@@ -73,7 +80,7 @@
             <label for="weight">Weight (lbs)</label>
             <input type="number" min="0" step="0.01" id="weight" name="weight" placeholder="0.00" required>
         </div>
-    </div>
+    </fieldset>
 
     <div class="btn-wrapper"><button type="submit" class="primary-btn">Create SKU</button></div>
 </form>

@@ -28,3 +28,4 @@ Temporary Items
 
 # Sensitive files
 .htaccess
+.env.php

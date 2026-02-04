@@ -10,4 +10,3 @@
     header("Location: ../idm250-sir/index.php?view=sku");
     exit;
     }
-?>
