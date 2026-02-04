@@ -2,5 +2,5 @@
 require_once '../lib/user-auth.php';
 
 logout_user();
-header('Location: ../idm250-sir/login.php');
+header('Location: ../user/login.php');
 exit;
