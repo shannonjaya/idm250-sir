@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $password = $_POST['password'] ?? '';
 
   if (login_user($email, $password)) {
-    header('Location: /index.php');
+    header('Location: ../idm250-sir/index.php?view=sku');
     exit;
   } else {
     $error = 'Invalid email or password';

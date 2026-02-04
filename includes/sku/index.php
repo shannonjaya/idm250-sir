@@ -18,8 +18,6 @@
             <th>Pieces</th>
             <th><div class="tooltip">Dimensions<span class="tooltip-text">L x W x H, inches</span></div></th>
             <th><div class="tooltip">Weight<span class="tooltip-text">pounds</span></div></th>
-            <th>Assembly</th>
-            <th>Rate</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -35,8 +33,6 @@
                 <td><?php echo htmlspecialchars($row['weight_lbs']); ?></td>
 
 
-                <td><span class="highlight<?php if ($row['assembly'] === '1') echo '-green'; ?>"><?php if ($row['assembly'] === '1') { echo "yes"; } else { echo "no"; } ?></span></td>
-                <td><?php echo htmlspecialchars($row['rate']); ?></td>
                 <td class="col-actions">
                         <a href="?view=edit-sku&id=<?php echo $row['id']; ?>" class="icon-btn">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
