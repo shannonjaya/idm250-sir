@@ -9,6 +9,7 @@ function get_all_skus($connection) {
 
     return $skus;
 }
+
 // GET SKU BY ID
 function get_sku($connection, $id) {
     $stmt = $connection->prepare("SELECT * FROM idm250_sku WHERE id = ?");
@@ -50,4 +51,3 @@ function delete_sku ($connection, $id) {
     }
     return false;
 }
-
