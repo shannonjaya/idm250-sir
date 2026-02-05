@@ -9,11 +9,9 @@
         $width = $_POST['width'] ?? 0.0;
         $height = $_POST['height'] ?? 0.0;
         $weight = $_POST['weight'] ?? 0.0;
-        $assembly = (int) $_POST['assembly'];
-        $rate = $_POST['rate'] ?? 0.0;
 
-    $stmt = $connection->prepare("INSERT INTO idm250_sku (ficha, sku, description, uom_primary, piece_count, length_inches, width_inches, height_inches, weight_lbs, assembly, rate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssiidddsi", $ficha, $sku, $description, $uom, $pieces, $length, $width, $height, $weight, $assembly, $rate);
+    $stmt = $connection->prepare("INSERT INTO idm250_sku (ficha, sku, description, uom, pieces, length_inches, width_inches, height_inches, weight_lbs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssiiidd", $ficha, $sku, $description, $uom, $pieces, $length, $width, $height, $weight);
     $stmt->execute();
     $stmt->close();
 

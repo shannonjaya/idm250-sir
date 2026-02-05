@@ -9,8 +9,6 @@
     $width = "";
     $height = "";
     $weight = "";
-    $assembly = "";
-    $rate = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "GET"){
         if(!isset($_GET['id'])) {
@@ -35,14 +33,12 @@
         $ficha = $row['ficha'];
         $sku = $row['sku'];
         $description = $row['description'];
-        $uom = $row['uom_primary'];
-        $pieces = $row['piece_count'];
+        $uom = $row['uom'];
+        $pieces = $row['pieces'];
         $length = $row['length_inches'];
         $width = $row['width_inches'];
         $height = $row['height_inches'];
         $weight = $row['weight_lbs'];
-        $assembly = $row['assembly'];
-        $rate = $row['rate'];
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $id = $_POST['id'];
@@ -55,11 +51,9 @@
         $width = $_POST['width'] ?? 0.0;
         $height = $_POST['height'] ?? 0.0;
         $weight = $_POST['weight'] ?? 0.0;
-        $assembly = (int) $_POST['assembly'];
-        $rate = $_POST['rate'] ?? 0.0;
 
-        $stmt = $connection->prepare("UPDATE idm250_sku SET ficha = ?, sku = ?, description = ?, uom_primary = ?, piece_count = ?, length_inches = ?, width_inches = ?, height_inches = ?, weight_lbs = ?, assembly = ?, rate = ? WHERE id = ?");
-        $stmt->bind_param("ssssiddddidi", $ficha, $sku, $description, $uom, $pieces, $length, $width, $height, $weight, $assembly, $rate, $id);
+        $stmt = $connection->prepare("UPDATE idm250_sku SET ficha = ?, sku = ?, description = ?, uom = ?, pieces = ?, length_inches = ?, width_inches = ?, height_inches = ?, weight_lbs = ? WHERE id = ?");
+        $stmt->bind_param("ssssiddddi", $ficha, $sku, $description, $uom, $pieces, $length, $width, $height, $weight, $id);
         $stmt->execute();
         $stmt->close();
 

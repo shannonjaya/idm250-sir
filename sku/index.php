@@ -27,8 +27,8 @@
                 <td><?php echo htmlspecialchars($row['ficha']); ?></td>
                 <td><?php echo htmlspecialchars($row['sku']); ?></td>
                 <td><?php echo htmlspecialchars($row['description']); ?></td>
-                <td><?php echo htmlspecialchars($row['uom_primary']); ?></td>
-                <td><?php echo htmlspecialchars($row['piece_count']); ?></td>
+                <td><?php echo htmlspecialchars($row['uom']); ?></td>
+                <td><?php echo htmlspecialchars($row['pieces']); ?></td>
                 <td><?php echo htmlspecialchars($row['length_inches']) . " x " . htmlspecialchars($row['width_inches']) . " x " . htmlspecialchars($row['height_inches']); ?></td>
                 <td><?php echo htmlspecialchars($row['weight_lbs']); ?></td>
                 <td class="col-actions">

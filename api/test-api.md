@@ -41,14 +41,12 @@ X-API-KEY: sir-api-key-2026
     "ficha": 452,
     "sku": "1720823-0567",
     "description": "BIRCH YEL FAS 6/4 RGH KD 10FT",
-    "uom_primary": "PALLET",
-    "piece_count": 95,
+    "uom": "PALLET",
+    "pieces": 95,
     "length_inches": "120",
     "width_inches": "44",
     "height_inches": "34",
     "weight_lbs": "3120",
-    "assembly": 0,
-    "rate": "18"
   }
 }
 ```
