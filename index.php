@@ -20,11 +20,8 @@ require_once 'lib/protect.php';
                 case 'sku':
                     include 'sku/index.php';
                     break;
-                case 'create-sku':
-                    include 'sku/create-sku.php';
-                    break;
-                case 'edit-sku':
-                    include 'sku/edit-sku.php';
+                case 'sku-form':
+                    include 'sku/sku-form.php';
                     break;
                 case 'delete-sku':
                     include 'sku/delete-sku.php';
