@@ -1,0 +1,92 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:8889
+-- Generation Time: Feb 05, 2026 at 12:22 AM
+-- Server version: 8.0.40
+-- PHP Version: 8.3.14
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `sej84_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `idm250_skus`
+--
+
+CREATE TABLE `idm250_skus` (
+  `id` int NOT NULL,
+  `ficha` int DEFAULT NULL,
+  `sku` varchar(12) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `description` varchar(31) DEFAULT NULL,
+  `uom` varchar(6) DEFAULT NULL,
+  `pieces` int DEFAULT NULL,
+  `length_inches` decimal(10,0) DEFAULT NULL,
+  `width_inches` decimal(10,0) DEFAULT NULL,
+  `height_inches` decimal(3,1) DEFAULT NULL,
+  `weight_lbs` decimal(6,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `idm250_skus`
+--
+
+INSERT INTO `idm250_skus` (`id`, `ficha`, `sku`, `description`, `uom`, `pieces`, `length_inches`, `width_inches`, `height_inches`, `weight_lbs`) VALUES
+(1, 452, '1720823-0567', 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PALLET', 95, 120, 44, 34.0, 3120.45),
+(2, 163, '1720824-0891', 'HEMLOCK DIM 2X8X14FT #2BTR STD', 'BUNDLE', 160, 168, 40, 28.5, 2975.30),
+(3, 589, '1720825-0234', 'ASH WHT FAS 4/4 RGH KD 9-11FT', 'PALLET', 110, 132, 46, 40.0, 3540.60),
+(4, 734, '1720826-0412', 'MDF ULTRALT C1-- 2440X1220X18MM', 'BUNDLE', 85, 96, 48, 52.0, 4250.75),
+(5, 298, '1720827-0178', 'CHERRY BLK SEL 5/4 RGH KD 8FT', 'PALLET', 70, 96, 42, 26.0, 1980.20),
+(6, 641, '1720828-0923', 'REDWOOD CLR VG 2X4X10FT KD HRT', 'BUNDLE', 225, 120, 38, 32.0, 2430.85),
+(7, 812, '1720829-0056', 'PARTICLEBOARD IND 3/4X49X97', 'PALLET', 60, 97, 49, 45.0, 3890.40),
+(8, 445, '1720830-0789', 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'BUNDLE', 140, 120, 40, 30.0, 2180.55),
+(9, 127, '1720831-0345', 'WHITE OAK QS 4/4 RGH KD 10FT', 'PALLET', 65, 120, 48, 38.0, 2890.70),
+(10, 568, '1720832-0612', 'SOUTHERN PINE PT 4X4X12FT GC', 'BUNDLE', 130, 144, 44, 48.0, 5120.35),
+(11, 152, '1720853-0430', 'PINE SELECT 1X6X10FT S4S', 'BUNDLE', 260, 120, 36, 28.0, 2050.00),
+(12, 619, '1720854-0444', 'WALNUT 4/4 KD 8-12FT', 'PALLET', 75, 144, 48, 32.0, 2450.00),
+(13, 943, '1720855-0458', 'DOUGLAS FIR 2X8X14FT #2', 'BUNDLE', 105, 168, 48, 40.0, 4200.00),
+(14, 378, '1720856-0472', 'CEDAR 1X4X8FT CLR S4S', 'BUNDLE', 350, 96, 36, 24.0, 1800.00),
+(15, 731, '1720857-0486', 'BIRCH PLY 3/4X5X5', 'PALLET', 42, 60, 60, 48.0, 2950.00),
+(16, 206, '1720858-0500', 'MAPLE HARD 4/4 FAS KD 10-14FT', 'PALLET', 105, 168, 48, 40.0, 3950.00),
+(17, 568, '1720859-0514', 'PINE #2 2X12X10FT KD', 'BUNDLE', 90, 120, 48, 44.0, 3800.00),
+(18, 821, '1720860-0528', 'ASH 4/4 FAS KD 9FT', 'PALLET', 125, 108, 48, 38.0, 3400.00),
+(19, 289, '1720861-0542', 'SPRUCE 2X10X12FT #2', 'BUNDLE', 100, 144, 48, 40.0, 4000.00),
+(20, 662, '1720862-0556', 'CEDAR WRC 2X6X10FT CLR', 'BUNDLE', 160, 120, 36, 30.0, 2400.00);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `idm250_skus`
+--
+ALTER TABLE `idm250_skus`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `idm250_skus`
+--
+ALTER TABLE `idm250_skus`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
