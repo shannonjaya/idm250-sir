@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8">
   <title>Login</title>
   <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="../assets/logo-dark.svg" type="image/svg+xml">
 </head>
 <body>
   <main class="main-content" style="margin-left:0; max-width:400px;">
