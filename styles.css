@@ -257,7 +257,7 @@ tr {
 
 td,
 th {
-  padding: calc(var(--rhythm) * 1) calc(var(--rhythm) * 0.5);
+  padding: calc(var(--rhythm) * 1) calc(var(--rhythm) * 1);
 }
 
 th {
@@ -270,7 +270,7 @@ th {
   text-transform: capitalize;
   background: #060d1c;
   color: #84caff;
-  padding: calc(var(--rhythm) * 0.25) calc(var(--rhythm) * 0.75);
+  padding: calc(var(--rhythm) * 0.45) calc(var(--rhythm) * 0.75);
   border: 1px solid #84caff;
   border-radius: var(--border-radius-full);
   font-size: calc(var(--font-small) * 0.95);
