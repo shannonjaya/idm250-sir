@@ -1,12 +1,9 @@
 <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $id = $_POST['id'];
+ require_once './lib/sku.php';
 
-    $stmt = $connection->prepare("DELETE FROM idm250_sku WHERE id = ?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $stmt->close();
-
-    header("Location: ../idm250-sir/index.php?view=sku");
-    exit;
-    }
+$id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $id) {
+    delete_sku($connection, $id);
+}
+header("Location: ../idm250-sir/index.php?view=sku");
+exit;

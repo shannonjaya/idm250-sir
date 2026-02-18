@@ -5,6 +5,7 @@ header('Access-Control-Allow-Origin: *');  // allows everyone access to this rou
 
 require_once "../lib/db-connect.php";
 require_once "../lib/auth.php";
+require_once "../lib/sku.php";
 
 check_api_key($env); // checks api key
 
@@ -19,13 +20,7 @@ if (!isset($_GET['id'])) {
 
 if ($method === 'GET') { // get sku by id
 
-    $stmt = $connection->prepare("SELECT * FROM idm250_sku WHERE id = ?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-
-    $result = $stmt->get_result(); // get the result of executing
-    $sku = $result->fetch_assoc(); // the result stored as an associative array
-    $stmt->close();
+    $sku = get_sku($connection, $id);
 
     if ($sku) {
         echo json_encode(['success' => true, 'data' => $sku]); //send it back

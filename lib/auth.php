@@ -1,4 +1,5 @@
 <?php
+    require_once "../lib/db-connect.php";
     function check_api_key($env) {
         $valid_api_key = $env['X_API_KEY'];
         $headers = getallheaders();
