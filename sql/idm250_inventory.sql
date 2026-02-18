@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Feb 05, 2026 at 12:22 AM
+-- Generation Time: Feb 18, 2026 at 06:49 PM
 -- Server version: 8.0.40
 -- PHP Version: 8.3.14
 
@@ -28,68 +28,65 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `idm250_inventory` (
-  `id` int NOT NULL,
-  `unit_id` int DEFAULT NULL,
-  `sku` int DEFAULT NULL,
-  `description` varchar(31) DEFAULT NULL,
-  `uom` varchar(2) DEFAULT NULL,
-  `date_received` date DEFAULT NULL
+  `unit_id` int NOT NULL,
+  `sku_id` int DEFAULT NULL,
+  `location` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `idm250_inventory`
 --
 
-INSERT INTO `idm250_inventory` (`id`, `unit_id`, `sku`, `description`, `uom`, `date_received`) VALUES
-(1, 28114990, 589, 'ASH WHT FAS 4/4 RGH KD 9-11FT', 'PC', '2025-11-24'),
-(2, 28114991, 589, 'ASH WHT FAS 4/4 RGH KD 9-11FT', 'PC', '2025-11-24'),
-(3, 28114992, 589, 'ASH WHT FAS 4/4 RGH KD 9-11FT', 'PC', '2025-11-24'),
-(4, 28114993, 589, 'ASH WHT FAS 4/4 RGH KD 9-11FT', 'PC', '2025-11-24'),
-(5, 28114994, 589, 'ASH WHT FAS 4/4 RGH KD 9-11FT', 'PC', '2025-11-24'),
-(6, 28114995, 589, 'ASH WHT FAS 4/4 RGH KD 9-11FT', 'PC', '2025-11-24'),
-(7, 28114996, 589, 'ASH WHT FAS 4/4 RGH KD 9-11FT', 'PC', '2025-11-24'),
-(8, 28114997, 589, 'ASH WHT FAS 4/4 RGH KD 9-11FT', 'PC', '2025-11-24'),
-(9, 28114998, 589, 'ASH WHT FAS 4/4 RGH KD 9-11FT', 'PC', '2025-11-24'),
-(10, 28114999, 589, 'ASH WHT FAS 4/4 RGH KD 9-11FT', 'PC', '2025-11-24'),
-(11, 28115000, 589, 'ASH WHT FAS 4/4 RGH KD 9-11FT', 'PC', '2025-11-24'),
-(12, 28115001, 589, 'ASH WHT FAS 4/4 RGH KD 9-11FT', 'PC', '2025-11-24'),
-(13, 28115002, 589, 'ASH WHT FAS 4/4 RGH KD 9-11FT', 'PC', '2025-11-24'),
-(14, 28115003, 589, 'ASH WHT FAS 4/4 RGH KD 9-11FT', 'PC', '2025-11-24'),
-(15, 28115004, 445, 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'PC', '2025-11-24'),
-(16, 28115005, 445, 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'PC', '2025-11-24'),
-(17, 28115006, 445, 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'PC', '2025-11-24'),
-(18, 28115007, 445, 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'PC', '2025-11-24'),
-(19, 28115008, 445, 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'PC', '2025-11-24'),
-(20, 28115009, 445, 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'PC', '2025-11-24'),
-(21, 28115010, 445, 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'PC', '2025-11-24'),
-(22, 28115011, 445, 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'PC', '2025-11-24'),
-(23, 28115012, 445, 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'PC', '2025-11-24'),
-(24, 28115013, 445, 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'PC', '2025-11-24'),
-(25, 28115014, 445, 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'PC', '2025-11-24'),
-(26, 28115015, 445, 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'PC', '2025-11-24'),
-(27, 28115016, 445, 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'PC', '2025-11-24'),
-(28, 28115017, 445, 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'PC', '2025-11-24'),
-(29, 28115018, 445, 'ALDER RED SEL 4/4 RGH KD 8-10FT', 'PC', '2025-11-24'),
-(30, 28115019, 452, 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PC', '2025-11-24'),
-(31, 28115020, 452, 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PC', '2025-11-24'),
-(32, 28115021, 452, 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PC', '2025-11-24'),
-(33, 28115022, 452, 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PC', '2025-11-24'),
-(34, 28115023, 452, 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PC', '2025-11-24'),
-(35, 28115024, 452, 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PC', '2025-11-24'),
-(36, 28115025, 452, 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PC', '2025-11-24'),
-(37, 28115026, 452, 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PC', '2025-11-24'),
-(38, 28115027, 452, 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PC', '2025-11-24'),
-(39, 28115028, 452, 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PC', '2025-11-24'),
-(40, 28115029, 452, 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PC', '2025-11-24'),
-(41, 28115030, 452, 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PC', '2025-11-24'),
-(42, 28115031, 452, 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PC', '2025-11-24'),
-(43, 28115032, 452, 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PC', '2025-11-24'),
-(44, 28115033, 452, 'BIRCH YEL FAS 6/4 RGH KD 10FT', 'PC', '2025-11-24'),
-(45, 28115034, 734, 'MDF ULTRALT C1-- 2440X1220X18MM', 'PC', '2025-11-24'),
-(46, 28115035, 734, 'MDF ULTRALT C1-- 2440X1220X18MM', 'PC', '2025-11-24'),
-(47, 28115036, 734, 'MDF ULTRALT C1-- 2440X1220X18MM', 'PC', '2025-11-24'),
-(48, 28115037, 734, 'MDF ULTRALT C1-- 2440X1220X18MM', 'PC', '2025-11-24'),
-(49, 28115038, 734, 'MDF ULTRALT C1-- 2440X1220X18MM', 'PC', '2025-11-24');
+INSERT INTO `idm250_inventory` (`unit_id`, `sku_id`, `location`) VALUES
+(28114990, 589, 'internal'),
+(28114991, 589, 'internal'),
+(28114992, 589, 'internal'),
+(28114993, 589, 'internal'),
+(28114994, 589, 'internal'),
+(28114995, 589, 'internal'),
+(28114996, 589, 'internal'),
+(28114997, 589, 'internal'),
+(28114998, 589, 'internal'),
+(28114999, 589, 'internal'),
+(28115000, 589, 'internal'),
+(28115001, 589, 'internal'),
+(28115002, 589, 'internal'),
+(28115003, 589, 'internal'),
+(28115004, 445, 'internal'),
+(28115005, 445, 'internal'),
+(28115006, 445, 'internal'),
+(28115007, 445, 'internal'),
+(28115008, 445, 'internal'),
+(28115009, 445, 'internal'),
+(28115010, 445, 'internal'),
+(28115011, 445, 'internal'),
+(28115012, 445, 'internal'),
+(28115013, 445, 'internal'),
+(28115014, 445, 'internal'),
+(28115015, 445, 'internal'),
+(28115016, 445, 'internal'),
+(28115017, 445, 'internal'),
+(28115018, 445, 'internal'),
+(28115019, 452, 'internal'),
+(28115020, 452, 'internal'),
+(28115021, 452, 'internal'),
+(28115022, 452, 'internal'),
+(28115023, 452, 'internal'),
+(28115024, 452, 'internal'),
+(28115025, 452, 'internal'),
+(28115026, 452, 'internal'),
+(28115027, 452, 'internal'),
+(28115028, 452, 'internal'),
+(28115029, 452, 'internal'),
+(28115030, 452, 'internal'),
+(28115031, 452, 'internal'),
+(28115032, 452, 'internal'),
+(28115033, 452, 'internal'),
+(28115034, 734, 'internal'),
+(28115035, 734, 'internal'),
+(28115036, 734, 'internal'),
+(28115037, 734, 'internal'),
+(28115038, 734, 'internal');
 
 --
 -- Indexes for dumped tables
@@ -99,7 +96,7 @@ INSERT INTO `idm250_inventory` (`id`, `unit_id`, `sku`, `description`, `uom`, `d
 -- Indexes for table `idm250_inventory`
 --
 ALTER TABLE `idm250_inventory`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`unit_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -109,7 +106,7 @@ ALTER TABLE `idm250_inventory`
 -- AUTO_INCREMENT for table `idm250_inventory`
 --
 ALTER TABLE `idm250_inventory`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `unit_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28115039;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
