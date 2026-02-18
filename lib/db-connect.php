@@ -1,5 +1,5 @@
 <?php
-$env_file = __DIR__ . "/.env.php";
+$env_file = "./.env.php";
 $env = file_exists($env_file) ? require $env_file : [];
 
 if (!is_array($env)) {
