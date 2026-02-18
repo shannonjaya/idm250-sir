@@ -2,7 +2,7 @@
         require_once '../lib/db-connect.php';
 
         $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-        $api_url = "http://localhost:8888/idm250-sir/api/test.php?id=$id"; // call this api route
+        $api_url = "http://localhost:8888/idm250-sir/api/sku.php?id=$id"; // call this api route
         $api_key = $env['X_API_KEY'];
 
         $options = [
