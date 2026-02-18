@@ -6,7 +6,7 @@ function get_all_mpls($connection) {
         SELECT 
             m.*,
             COUNT(mi.id) AS total_units
-        FROM idm250_mpl m
+        FROM idm250_mpls m
         LEFT JOIN idm250_mpl_items mi ON mi.mpl_id = m.id
         GROUP BY m.id
         ORDER BY m.id DESC
