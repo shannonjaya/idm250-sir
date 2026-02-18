@@ -4,10 +4,9 @@ $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $sku = $id ? get_sku($connection, $id) : [];
 
     if ($_SERVER['REQUEST_METHOD']=== 'POST'){
-        $ficha = $_POST['ficha'] ?? 0;
         $sku = $_POST['sku'] ?? "";
         $description = $_POST['description'] ?? "";
-        $uom = $_POST['uom'] ?? "";
+        $uom_primary = $_POST['uom_primary'] ?? "";
         $pieces = $_POST['pieces'] ?? 0;
         $length = $_POST['length'] ?? 0.0;
         $width = $_POST['width'] ?? 0.0;
@@ -15,11 +14,11 @@ $sku = $id ? get_sku($connection, $id) : [];
         $weight = $_POST['weight'] ?? 0.0;
     
         if ($id) {
-            edit_sku($connection, $id, $ficha, $sku, $description, $uom, $pieces, $length, $width, $height, $weight);
+            edit_sku($connection, $id, $sku, $description, $uom_primary, $pieces, $length, $width, $height, $weight);
         } else {
-            $id = create_sku($connection, $ficha, $sku, $description, $uom, $pieces, $length, $width, $height, $weight);
+            $id = create_sku($connection, $sku, $description, $uom_primary, $pieces, $length, $width, $height, $weight);
         }
-        header("Location: ../index.php?view=sku");
+        header("Location: index.php?view=sku");
         exit;
     }
 ?>
@@ -33,10 +32,6 @@ $sku = $id ? get_sku($connection, $id) : [];
 
     <fieldset class="row">
         <legend>SKU Details</legend>
-        <div class="form-item">
-            <label for="ficha">Ficha</label>
-            <input type="number" min="0" id="ficha" name="ficha"  value="<?= ($sku['ficha']) ?? ''; ?>" placeholder="000" required>
-        </div>
         <div class="form-item">
             <label for="sku">SKU</label>
             <input type="text" min="0" id="sku" name="sku"  value="<?= ($sku['sku']) ?? ''; ?>" placeholder="0000000-0000" required>
@@ -54,10 +49,10 @@ $sku = $id ? get_sku($connection, $id) : [];
     <fieldset class="row">
         <legend>Packaging</legend>
         <div class="form-item">
-            <label for="uom">UOM</label>
-            <select id="uom" name="uom" required>
-                <option value="PALLET" <?php if (($sku['uom'] ?? '') === "PALLET") { echo 'selected'; } ?>>PALLET</option>
-                <option value="BUNDLE" <?php if (($sku['uom'] ?? '') === "BUNDLE") { echo 'selected'; } ?>>BUNDLE</option>
+            <label for="uom_primary">UOM</label>
+            <select id="uom_primary" name="uom_primary" required>
+                <option value="PALLET" <?php if (($sku['uom_primary'] ?? '') === "PALLET") { echo 'selected'; } ?>>PALLET</option>
+                <option value="BUNDLE" <?php if (($sku['uom_primary'] ?? '') === "BUNDLE") { echo 'selected'; } ?>>BUNDLE</option>
             </select>
         </div>
         <div class="form-item">

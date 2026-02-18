@@ -10,7 +10,7 @@
     <h1>SKU API Demo</h1>
 
     <?php
-        require_once '../lib/db-connect.php';
+        require_once './lib/db-connect.php';
 
         $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
         $api_url = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/sku.php?id=$id"; // call this api route
