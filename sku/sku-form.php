@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . '/../lib/functions.php'; // Create or Edit SKU
+<?php require_once './lib/functions.php'; // Create or Edit SKU
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $sku = $id ? get_sku($connection, $id) : [];

@@ -1,9 +1,9 @@
 <?php
 require_once './lib/functions.php';
 
-$id = isset($_POST['id']) ? intval($_POST['id']) : 0;
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $id) {
-    delete_mpl($connection, $id);
+$mpl_id = isset($_POST['mpl_id']) ? intval($_POST['mpl_id']) : 0;
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $mpl_id) {
+    delete_mpl($connection, $mpl_id);
 }
-header("Location: ../idm250-sir/index.php?view=mpl");
+header("Location: ../idm250-sir/index.php?view=mpls");
 exit;

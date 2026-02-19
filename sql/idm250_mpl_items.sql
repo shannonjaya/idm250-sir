@@ -40,17 +40,8 @@ CREATE TABLE `idm250_mpl_items` (
 -- Indexes for table `idm250_mpl_items`
 --
 ALTER TABLE `idm250_mpl_items`
-  ADD PRIMARY KEY (`mpl_id`);
+  ADD PRIMARY KEY (`mpl_id`, `unit_id`);
 
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `idm250_mpl_items`
---
-ALTER TABLE `idm250_mpl_items`
-  MODIFY `mpl_id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

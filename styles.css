@@ -241,9 +241,28 @@ ul.sidebar-menu {
 
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   margin-bottom: var(--rhythm);
   font-size: var(--font-small);
+  table-layout: fixed;
+}
+
+.select-inventory-unit-table {
+  border: var(--border);
+  border-radius: var(--border-radius);
+}
+
+.select-inventory-unit-table tbody {
+  display: block;
+  max-height: 250px;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+thead {
+  display: table-header-group;
+  width: 100%;
 }
 
 tbody tr:nth-child(even) {
@@ -251,13 +270,16 @@ tbody tr:nth-child(even) {
 }
 
 tr {
-  border-bottom: var(--border-dotted);
-  padding: calc(var(--rhythm) * 2);
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 
 td,
 th {
   padding: calc(var(--rhythm) * 1) calc(var(--rhythm) * 1);
+  border-bottom: var(--border-dotted);
+  display: table-cell;
 }
 
 th {
@@ -265,17 +287,23 @@ th {
   text-align: left;
 }
 
+th.checkbox {
+  width: 30px;
+}
+
 .highlight,
 .highlight-green,
-.highlight-gray {
-  text-transform: capitalize;
+.highlight-yellow {
+  text-transform: uppercase;
   background: #060d1c;
   color: #84caff;
-  padding: calc(var(--rhythm) * 0.45) calc(var(--rhythm) * 0.75);
+  padding: calc(var(--rhythm) * 0.45) calc(var(--rhythm) * 1);
   border: 1px solid #84caff;
   border-radius: var(--border-radius-full);
   font-size: calc(var(--font-small) * 0.95);
   text-align: center;
+  margin: auto;
+  width: fit-content;
 }
 
 .highlight-green {
@@ -284,19 +312,24 @@ th {
   border-color: #7fffd4;
 }
 
-.highlight-gray {
+.highlight-yellow {
   background: #232323;
   color: #ffef5e;
   border-color: #ffef5e;
 }
 
-td:has(.highlight, .highlight-green, .highlight-gray) {
+td:has(.highlight, .highlight-green, .highlight-yellow) {
   text-align: center;
 }
 
 td.col-actions {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--rhythm) * 0.5);
+  min-width: 100px;
+  padding: calc(var(--rhythm) * 1.5) calc(var(--rhythm) * 1);
 }
 
 /* FORMS */
@@ -318,6 +351,26 @@ textarea:focus,
 select:focus {
   outline: none;
   border-color: var(--primary-color);
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+input[type="date"] {
+  text-transform: uppercase;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  transform: scale(1.05);
 }
 
 textarea {
