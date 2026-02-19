@@ -7,13 +7,12 @@
     <link rel="icon" href="../assets/logo-dark.svg" type="image/svg+xml">
 </head>
 <body>
-    <h1>SKU API Demo</h1>
+    <h1>SKUs API</h1>
 
 <?php
         require_once 'lib/db-connect.php';
 
-        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-        $api_url = "https://digmstudents.westphal.drexel.edu/~sej84/idm250-sir/api/sku.php?id=$id"; // call this api route
+        $api_url = "https://digmstudents.westphal.drexel.edu/~sej84/idm250-sir/api/sku.php"; // call this api route
         $api_key = $env['X_API_KEY'];
 
         $options = [
@@ -26,17 +25,19 @@
         $response = file_get_contents($api_url, false, $context);//making the api call, calls it reponse because thats what it returns
 
         if ($response === false) {
-            echo "<p>Error fetching sku.</p>";
+            echo "<p>Error fetching skus.</p>";
         } else {
             $data = json_decode($response, true);
             if (isset($data['success']) && $data['success'] === true) { // first checking is it set, does this key exist, and then it checks if this is true
-                $sku = $data['data']; // both teams calling it data
+                $skus = $data['data']; // both teams calling it data
 
-                if(empty($sku)) {
-                    echo "<p>No sku found.</p>";
+                if(empty($skus)) {
+                    echo "<p>No skus found.</p>";
                 } else {
                     echo "<ul>";
-                    echo "<li>" . htmlspecialchars($sku['description']) . htmlspecialchars($sku['sku']) . "</li>";
+                    foreach ($skus as $sku) {
+                        echo "<li>" . htmlspecialchars($sku['description']) . " - " . htmlspecialchars($sku['sku']) . "</li>";
+                    }
                     echo "</ul>";
                 }
             } else {

@@ -10,22 +10,15 @@ require_once "../lib/functions.php";
 check_api_key($env);
 
 $method = $_SERVER['REQUEST_METHOD'];
-$id = intval($_GET['id'] ?? 0);
-
-if (!isset($_GET['id'])) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Bad Request', 'details' => 'Missing SKU ID']);
-    exit;
-}
 
 if ($method === 'GET') {
-    $sku = get_sku($connection, $id);
+    $skus = get_all_skus($connection);
 
-    if ($sku) {
-        echo json_encode(['success' => true, 'data' => $sku]);
+    if ($skus) {
+        echo json_encode(['success' => true, 'data' => $skus]);
     } else {
         http_response_code(404);
-        echo json_encode(['error' => 'SKU not found']);
+        echo json_encode(['error' => 'SKUs not found']);
     }
 }
 
