@@ -267,6 +267,7 @@ ul.sidebar-menu {
   display: flex;
   justify-content: flex-end;
   margin-top: calc(var(--rhythm) * 1);
+  gap: calc(var(--rhythm) * 0.75);
 }
 
 /* TABLES */

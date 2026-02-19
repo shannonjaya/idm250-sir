@@ -105,6 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reference_number'])) 
     </fieldset>
 
     <div class="btn-wrapper">
+        <a href="index.php?view=mpls" class="primary-btn">Cancel</a>
         <button type="submit" class="primary-btn"><?php echo $mpl_id ? 'Update' : 'Create'; ?> MPL</button>
     </div>
 

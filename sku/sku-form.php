@@ -81,7 +81,10 @@ $sku = $id ? get_sku($connection, $id) : [];
         </div>
     </fieldset>
 
-    <div class="btn-wrapper"><button type="submit" class="primary-btn"><?php echo isset($_GET['id']) ? 'Edit ' : 'Create '; ?>SKU</button></div>
+    <div class="btn-wrapper">
+        <a href="index.php?view=sku" class="primary-btn">Cancel</a>
+        <button type="submit" class="primary-btn"><?php echo isset($_GET['id']) ? 'Edit ' : 'Create '; ?>SKU</button>
+    </div>
 </form>
 
 
