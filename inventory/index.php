@@ -39,7 +39,7 @@ $all_inventory = get_all_inventory_units($connection);
                     </td>
                 </tr>
             <?php endforeach; ?>
-            <?php if (empty($inventory)): ?>
+            <?php if (empty($all_inventory)): ?>
                 <tr>
                     <td colspan="5" class="empty-table">
                         <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
