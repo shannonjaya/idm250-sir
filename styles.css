@@ -73,6 +73,18 @@ label {
   font-size: var(--font-small);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-wide);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.error {
+  font-family: var(--font-sans);
+  text-transform: none;
+  font-weight: var(--font-weight-regular);
+  color: rgb(255, 58, 58);
+  font-size: calc(var(--font-small) * 0.95);
+  margin: 0;
 }
 
 /* UI COMPONENTS */

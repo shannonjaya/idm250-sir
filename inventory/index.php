@@ -1,6 +1,6 @@
 <?php
 require_once './lib/functions.php';
-$inventory = get_all_inventory_units($connection);
+$all_inventory = get_all_inventory_units($connection);
 ?>
 
 <header class="main-header">
@@ -19,7 +19,7 @@ $inventory = get_all_inventory_units($connection);
             </tr>
         </thead>
         <tbody>
-            <?php foreach($inventory as $unit): ?>
+            <?php foreach($all_inventory as $unit): ?>
                 <tr>
                     <td><?=$unit['unit_id']; ?></td>
                     <td><?=$unit['sku']; ?></td>
