@@ -45,6 +45,9 @@ require_once 'lib/protect.php';
                 case 'delete-mpl':
                     include 'mpls/delete-mpl.php';
                     break;
+                case 'send-mpl':
+                    include 'mpls/send-mpl.php';
+                    break;
                 case 'orders':
                     include 'orders/index.php';
                     break;
