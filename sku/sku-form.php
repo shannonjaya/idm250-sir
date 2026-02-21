@@ -3,10 +3,8 @@
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $sku = $id ? get_sku($connection, $id) : [];
 
-$sku_code = $sku['sku'] ?? "";
-
     if ($_SERVER['REQUEST_METHOD']=== 'POST'){
-        $sku_code = $_POST['sku'] ?? "";
+        $sku = $_POST['sku'] ?? "";
         $description = $_POST['description'] ?? "";
         $uom_primary = $_POST['uom_primary'] ?? "";
         $pieces = $_POST['pieces'] ?? 0;
@@ -17,9 +15,9 @@ $sku_code = $sku['sku'] ?? "";
 
         try {
              if ($id) {
-            edit_sku($connection, $id, $sku_code, $description, $uom_primary, $pieces, $length, $width, $height, $weight);
+            edit_sku($connection, $id, $sku, $description, $uom_primary, $pieces, $length, $width, $height, $weight);
         } else {
-            $id = create_sku($connection, $sku_code, $description, $uom_primary, $pieces, $length, $width, $height, $weight);
+            $id = create_sku($connection, $sku, $description, $uom_primary, $pieces, $length, $width, $height, $weight);
         }
         } catch (mysqli_sql_exception $e) {
             if ($e->getCode() === 1062) {
@@ -46,7 +44,7 @@ $sku_code = $sku['sku'] ?? "";
         <legend>SKU Details</legend>
         <div class="form-item">
             <label for="sku">SKU</label>
-            <input type="text" id="sku" name="sku"  value="<?= ($sku_code) ?? ''; ?>" placeholder="0000000-0000" required>
+            <input type="text" id="sku" name="sku"  value="<?= ($sku['sku']) ?? ''; ?>" placeholder="0000000-0000" required>
             <?php if (isset($sku_error)): ?>
                 <p class="error"><?= htmlspecialchars($sku_error) ?></p>
             <?php endif; ?>
