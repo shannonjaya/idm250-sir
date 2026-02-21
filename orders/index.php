@@ -1,4 +1,93 @@
+<?php
+require_once './lib/functions.php';
+$orders = get_all_orders($connection);
+?>
+
 <header class="main-header">
     <h1 class="main-heading">Order Management</h1>
-    <a href="?view=create-order" class="primary-btn">Create Order</a>
+    <a href="?view=order-form" class="primary-btn">Create Order</a>
 </header>
+
+<table>
+    <thead>
+        <tr>
+            <th>Order Number</th>
+            <th>Company</th>
+            <th>Shipping Address</th>
+            <th>Total Units</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($orders as $order): ?>
+            <tr>
+                <td><?=$order['order_number']; ?></td>
+                <td><?=$order['ship_to_company']; ?></td>
+                <td><?=$order['ship_to_street'] . " " . $order['ship_to_city'] . " " . $order['ship_to_state'] . " " . $order['ship_to_zip'];  ?></td>
+                <td><?=$order['total_units']; ?></td>
+                <td><?=$order['status']; ?></td>
+                <td>
+                    <p class="highlight<?php
+                        if ($order['status'] === 'confirmed') { echo "-green"; }
+                    ?>">
+                        <?=$order['status']; ?>
+                    </p>
+                </td>
+
+                <td class="col-actions">
+                    <?php if ($order['status'] === 'draft'): ?>
+                        <form action="?view=send-order" method="post">
+                            <input type="hidden" name="order_id" value="<?=$order['order_id']; ?>">
+                            <button class="icon-btn" type="submit"
+                                onclick="return confirm('Are you sure you want to send Order <?=$order['order_number']; ?>?');">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <mask id="mask0_121_58" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                                        <path d="M0 0H24V24H0V0Z" fill="white"/>
+                                    </mask>
+                                    <g mask="url(#mask0_121_58)">
+                                        <path d="M9.75 12.75L2.25 9.75L18.75 3.75L12.75 20.25L9.75 12.75ZM9.75 12.75L13.5 9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                    </g>
+                                </svg>
+                            </button>
+                        </form>
+                        <a href="?view=order-form&id=<?php echo $order['order_id']; ?>" class="icon-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <mask id="mask0_20_27" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect width="24" height="24" fill="#D9D9D9"/></mask><g mask="url(#mask0_20_27)"><path d="M5.30775 20.5C4.80258 20.5 4.375 20.325 4.025 19.975C3.675 19.625 3.5 19.1974 3.5 18.6923V5.30777C3.5 4.80261 3.675 4.37502 4.025 4.02502C4.375 3.67502 4.80258 3.50002 5.30775 3.50002H13.9635L12.4635 5.00002H5.30775C5.23075 5.00002 5.16025 5.03211 5.09625 5.09627C5.03208 5.16027 5 5.23077 5 5.30777V18.6923C5 18.7693 5.03208 18.8398 5.09625 18.9038C5.16025 18.9679 5.23075 19 5.30775 19H18.6923C18.7693 19 18.8398 18.9679 18.9038 18.9038C18.9679 18.8398 19 18.7693 19 18.6923V11.473L20.5 9.97302V18.6923C20.5 19.1974 20.325 19.625 19.975 19.975C19.625 20.325 19.1974 20.5 18.6923 20.5H5.30775ZM9.5 14.5V11.0673L18.5598 2.00777C18.7148 1.85261 18.8852 1.73944 19.0712 1.66827C19.2571 1.59711 19.4462 1.56152 19.6385 1.56152C19.8347 1.56152 20.0231 1.59711 20.2038 1.66827C20.3846 1.73944 20.5493 1.84936 20.698 1.99802L21.9538 3.25002C22.0986 3.40519 22.2098 3.57636 22.2875 3.76352C22.365 3.95069 22.4038 4.14044 22.4038 4.33277C22.4038 4.52511 22.3708 4.71161 22.3048 4.89227C22.2388 5.07311 22.1282 5.24102 21.973 5.39602L12.8845 14.5H9.5ZM11 13H12.2463L18.4788 6.76727L17.8558 6.14427L17.1885 5.50202L11 11.6905V13Z"/></g>
+                            </svg>
+                        </a>
+                        <form action="?view=delete-order" method="post">
+                            <input type="hidden" name="order_id" value="<?=$order['order_id']; ?>">
+                            <button class="icon-btn" type="submit"
+                                onclick="return confirm('Are you sure you want to delete Order <?=$order['order_number']; ?>?');">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <mask id="mask0_20_33" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                                        <rect width="24" height="24" fill="#D9D9D9"/>
+                                    </mask>
+                                    <g mask="url(#mask0_20_33)">
+                                        <path d="M7.30775 20.5C6.80908 20.5 6.38308 20.3234 6.02975 19.9702C5.67658 19.6169 5.5 19.1909 5.5 18.6922V5.99998H4.5V4.49998H9V3.61548H15V4.49998H19.5V5.99998H18.5V18.6922C18.5 19.1974 18.325 19.625 17.975 19.975C17.625 20.325 17.1974 20.5 16.6923 20.5H7.30775ZM17 5.99998H7V18.6922C7 18.7821 7.02883 18.8558 7.0865 18.9135C7.14417 18.9711 7.21792 19 7.30775 19H16.6923C16.7693 19 16.8398 18.9679 16.9038 18.9037C16.9679 18.8397 17 18.7692 17 18.6922V5.99998ZM9.404 17H10.9037V7.99998H9.404V17ZM13.0962 17H14.596V7.99998H13.0962V17Z"/>
+                                    </g>
+                                </svg>
+                            </button>
+                        </form>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        <?php if (empty($orders)): ?>
+            <tr>
+                <td colspan="6" class="empty-table">
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <mask id="mask0_119_89" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="72" height="72">
+                            <rect width="72" height="72" fill="currentColor"/>
+                        </mask>
+                        <g mask="url(#mask0_119_89)">
+                            <path d="M15 12V30.9983V30.9233V60V12ZM16.8465 63C15.4655 63 14.3125 62.5375 13.3875 61.6125C12.4625 60.6875 12 59.5345 12 58.1535V13.8465C12 12.4655 12.4625 11.3125 13.3875 10.3875C14.3125 9.4625 15.4655 9 16.8465 9H38.4863C39.1498 9 39.782 9.13075 40.383 9.39225C40.984 9.65375 41.5018 10.0018 41.9363 10.4363L52.5638 21.0637C52.9983 21.4982 53.3463 22.016 53.6078 22.617C53.8693 23.218 54 23.8502 54 24.5137V30.5363C54 30.9673 53.856 31.3223 53.568 31.6013C53.28 31.8798 52.9233 32.019 52.4978 32.019C52.0723 32.019 51.7163 31.8753 51.4298 31.5878C51.1433 31.3003 51 30.944 51 30.519V24H41.3993C40.7188 24 40.1488 23.77 39.6893 23.31C39.2298 22.85 39 22.28 39 21.6V12H16.8465C16.3845 12 15.9613 12.1923 15.5768 12.5768C15.1923 12.9613 15 13.3845 15 13.8465V58.1535C15 58.6155 15.1923 59.0388 15.5768 59.4233C15.9613 59.8078 16.3845 60 16.8465 60H32.481C32.906 60 33.2623 60.144 33.5498 60.432C33.8373 60.72 33.981 61.0768 33.981 61.5023C33.981 61.9278 33.8373 62.2838 33.5498 62.5703C33.2623 62.8568 32.906 63 32.481 63H16.8465ZM55.4888 55.4768C57.1118 53.8463 57.9233 51.8503 57.9233 49.4888C57.9233 47.1273 57.1078 45.1348 55.4768 43.5113C53.8463 41.8883 51.8503 41.0768 49.4888 41.0768C47.1273 41.0768 45.1348 41.8923 43.5113 43.5233C41.8883 45.1538 41.0768 47.1498 41.0768 49.5113C41.0768 51.8728 41.8923 53.8653 43.5233 55.4888C45.1538 57.1118 47.1498 57.9233 49.5113 57.9233C51.8728 57.9233 53.8653 57.1078 55.4888 55.4768ZM64.8038 66.2828C64.3743 66.2828 64.0193 66.1423 63.7388 65.8613L56.469 58.5345C55.496 59.3115 54.4163 59.9038 53.2298 60.3113C52.0433 60.7193 50.8 60.9233 49.5 60.9233C46.327 60.9233 43.63 59.8125 41.409 57.591C39.1875 55.37 38.0768 52.673 38.0768 49.5C38.0768 46.327 39.1875 43.63 41.409 41.409C43.63 39.1875 46.327 38.0768 49.5 38.0768C52.673 38.0768 55.37 39.1875 57.591 41.409C59.8125 43.63 60.9233 46.327 60.9233 49.5C60.9233 50.8 60.7193 52.0433 60.3113 53.2298C59.9038 54.4163 59.3115 55.496 58.5345 56.469L65.8613 63.7388C66.1423 64.0158 66.2828 64.3688 66.2828 64.7978C66.2828 65.2263 66.1438 65.5808 65.8658 65.8613C65.5878 66.1423 65.2338 66.2828 64.8038 66.2828Z" fill="currentColor"/>
+                        </g>
+                    </svg>
+                    <p>No orders found. <a class="secondary-btn" href="?view=order-form">Create an Order.</a></p>
+                </td>
+            </tr>
+        <?php endif; ?>
+    </tbody>
+</table>

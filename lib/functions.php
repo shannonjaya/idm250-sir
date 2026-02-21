@@ -228,6 +228,8 @@ function update_mpl_status($connection, $mpl_id, $status) {
 }
 
 // ------FUNCTIONS FOR ORDER MANAGEMENT-----//
+
+// GET ALL ORDERS
 function get_all_orders($connection) {
     $stmt = $connection->prepare("SELECT * FROM idm250_orders");
     $stmt->execute();
@@ -235,4 +237,63 @@ function get_all_orders($connection) {
     $orders = $result->fetch_all(MYSQLI_ASSOC);
 
     return $orders;
+}
+
+// CREATE ORDER
+function create_order($connection, $data, $unit_ids) {
+    $stmt = $connection->prepare("INSERT INTO idm250_orders (order_number, ship_to_company, ship_to_street, ship_to_city, ship_to_state, ship_to_zip, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssss", $data['order_number'], $data['ship_to_company'], $data['ship_to_street'], $data['ship_to_city'], $data['ship_to_state'], $data['ship_to_zip'], $data['status']);
+    $stmt->execute();
+    
+    $order_id = $connection->insert_id;
+    $stmt = $connection->prepare("INSERT INTO idm250_order_items (order_id, unit_id) VALUES (?, ?)");
+
+    foreach ($unit_ids as $unit_id) {
+        $stmt->bind_param("ii", $order_id, $unit_id);
+        $stmt->execute();
+    }
+}
+
+function delete_order($connection, $order_id) {
+    $stmt = $connection->prepare("DELETE FROM idm250_order_items WHERE order_id = ?");
+    $stmt->bind_param("i", $order_id);
+    $stmt->execute();
+    
+    $stmt = $connection->prepare("DELETE FROM idm250_orders WHERE order_id = ? LIMIT 1");
+    $stmt->bind_param("i", $order_id);
+    if ($stmt->execute()) {
+        return true;
+    }
+    return false;
+}
+
+function edit_order($connection, $order_id, $data, $unit_ids) {
+    $check = $connection->prepare("SELECT order_id FROM idm250_orders WHERE order_id = ? AND status = 'draft'");
+    $check->bind_param("i", $order_id);
+    $check->execute();
+    $result = $check->get_result();
+    
+    if ($result->num_rows === 0) {
+        return false;
+    }
+    
+
+    $stmt = $connection->prepare("UPDATE idm250_orders SET order_number = ?, ship_to_company = ?, ship_to_street = ?, ship_to_city = ?, ship_to_state = ?, ship_to_zip = ? WHERE order_id = ? LIMIT 1");
+    $stmt->bind_param("ssssssi", $data['order_number'], $data['ship_to_company'], $data['ship_to_street'], $data['ship_to_city'], $data['ship_to_state'], $data['ship_to_zip'], $order_id);
+    $stmt->execute();
+    
+
+    $stmt = $connection->prepare("DELETE FROM idm250_order_items WHERE order_id = ?");
+    $stmt->bind_param("i", $order_id);
+    $stmt->execute();
+    
+
+    $stmt = $connection->prepare("INSERT INTO idm250_order_items (order_id, unit_id) VALUES (?, ?)");
+    foreach ($unit_ids as $unit_id) {
+        $unit_id = intval($unit_id);
+        $stmt->bind_param("ii", $order_id, $unit_id);
+        $stmt->execute();
+    }
+    
+    return true;
 }
