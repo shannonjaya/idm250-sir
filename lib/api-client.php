@@ -33,7 +33,7 @@ function send_mpl($connection, $mpl_id) {
             ];
     }
 
-    $url = "http://localhost:8888/idm250-sir/api/mpls.php"; // to be replaced with Team 4D endpoint
+    $url = "https://digmstudents.westphal.drexel.edu/~sej84/idm250/api/mpls.php"; // to be replaced with Team 4D endpoint
     $api_key = $env['X_API_KEY'];
 
     $header = $mpl[0];
@@ -78,7 +78,7 @@ function send_order($connection, $order_id) {
             ];
     }
 
-    $url = "http://localhost:8888/idm250-sir/api/orders.php"; // to be replaced with Team 4D endpoint
+    $url = "https://digmstudents.westphal.drexel.edu/~sej84/idm250/api/orders.php"; // to be replaced with Team 4D endpoint
     $api_key = $env['X_API_KEY'];
 
     $header = $order[0];
