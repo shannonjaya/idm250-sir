@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Feb 18, 2026 at 06:49 PM
+-- Generation Time: Feb 21, 2026 at 11:27 PM
 -- Server version: 8.0.40
 -- PHP Version: 8.3.14
 
@@ -43,7 +43,8 @@ CREATE TABLE `idm250_mpls` (
 -- Indexes for table `idm250_mpls`
 --
 ALTER TABLE `idm250_mpls`
-  ADD PRIMARY KEY (`mpl_id`);
+  ADD PRIMARY KEY (`mpl_id`),
+  ADD UNIQUE KEY `reference_number` (`reference_number`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -53,7 +54,7 @@ ALTER TABLE `idm250_mpls`
 -- AUTO_INCREMENT for table `idm250_mpls`
 --
 ALTER TABLE `idm250_mpls`
-  MODIFY `mpl_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `mpl_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
