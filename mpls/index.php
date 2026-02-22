@@ -14,8 +14,8 @@ $mpls = get_all_mpls($connection);
             <th>Reference</th>
             <th>Trailer</th>
             <th>Exp. Arrival</th>
-            <th>Total Units</th>
-            <th>Status</th>
+            <th style="margin: auto; text-align: center;">Total Units</th>
+            <th style="margin: auto; text-align: center;">Status</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -25,7 +25,7 @@ $mpls = get_all_mpls($connection);
                 <td><?=$mpl['reference_number']; ?></td>
                 <td><?=$mpl['trailer_number']; ?></td>
                 <td><?=$mpl['expected_arrival']; ?></td>
-                <td><?=$mpl['total_units']; ?></td>
+                <td style="margin: auto; text-align: center;"><?=$mpl['total_units']; ?></td>
                 <td>
                     <p class="highlight<?php
                         if ($mpl['status'] === 'confirmed') { echo "-green"; }

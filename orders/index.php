@@ -11,11 +11,12 @@ $orders = get_all_orders($connection);
 <table>
     <thead>
         <tr>
-            <th>Order Number</th>
+            <th>Order</th>
             <th>Company</th>
-            <th>Shipping Address</th>
-            <th>Total Units</th>
-            <th>Status</th>
+            <th>Address</th>
+            <th>Shipped At</th>
+            <th style="margin: auto; text-align: center;">Total Units</th>
+            <th style="margin: auto; text-align: center;">Status</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -25,8 +26,8 @@ $orders = get_all_orders($connection);
                 <td><?=$order['order_number']; ?></td>
                 <td><?=$order['ship_to_company']; ?></td>
                 <td><?=$order['ship_to_street'] . " " . $order['ship_to_city'] . " " . $order['ship_to_state'] . " " . $order['ship_to_zip'];  ?></td>
-                <td><?=$order['total_units']; ?></td>
-                <td><?=$order['status']; ?></td>
+                <td><p <?php if ($order['shipped_at'] === null) { echo "class='highlight-yellow'"; } ?>"> <?=($order['shipped_at'] === null) ? 'N/A' : $order['shipped_at']; ?></p></td>
+                <td style="margin: auto; text-align: center;"><?=$order['total_units']; ?></td>
                 <td>
                     <p class="highlight<?php
                         if ($order['status'] === 'confirmed') { echo "-green"; }

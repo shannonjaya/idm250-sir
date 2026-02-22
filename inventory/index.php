@@ -14,8 +14,8 @@ $all_inventory = get_all_inventory_units($connection);
                 <th>Unit ID</th>
                 <th>SKU</th>
                 <th>Description</th>
-                <th>UOM</th>
-                <th>Location</th>
+                <th style="margin: auto; text-align: center;">UOM</th>
+                <th style="margin: auto; text-align: center;">Location</th>
             </tr>
         </thead>
         <tbody>
