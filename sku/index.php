@@ -14,8 +14,8 @@ $skus = get_all_skus($connection);
             <th>ID</th>
             <th>SKU</th>
             <th>Description</th>
-            <th>UOM</th>
-            <th>Pieces</th>
+            <th style="margin: auto; text-align: center;">UOM</th>
+            <th style="margin: auto; text-align: center;">Pieces</th>
             <th><div class="tooltip">Dimensions<span class="tooltip-text">L x W x H, inches</span></div></th>
             <th><div class="tooltip">Weight<span class="tooltip-text">pounds</span></div></th>
             <th>Actions</th>
@@ -32,7 +32,7 @@ $skus = get_all_skus($connection);
                         <?=$sku['uom_primary']; ?>
                     </p>
                 </td>
-                <td><?=$sku['pieces']; ?></td>
+                <td style="margin: auto; text-align: center;"><?=$sku['pieces']; ?></td>
                 <td><?=$sku['length_inches'] . " x " . $sku['width_inches'] . " x " . $sku['height_inches']; ?></td>
                 <td><?=$sku['weight_lbs']; ?></td>
                 <td class="col-actions">

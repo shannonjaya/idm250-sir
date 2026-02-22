@@ -24,12 +24,15 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `idm250_mpl_items`
+-- Table structure for table `idm250_user`
 --
 
-CREATE TABLE `idm250_mpl_items` (
-  `mpl_id` int NOT NULL,
-  `unit_id` int NOT NULL
+CREATE TABLE `idm250_user` (
+  `id` int NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `role` varchar(50) DEFAULT 'admin',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -37,10 +40,21 @@ CREATE TABLE `idm250_mpl_items` (
 --
 
 --
--- Indexes for table `idm250_mpl_items`
+-- Indexes for table `idm250_user`
 --
-ALTER TABLE `idm250_mpl_items`
-  ADD PRIMARY KEY (`mpl_id`,`unit_id`);
+ALTER TABLE `idm250_user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `idm250_user`
+--
+ALTER TABLE `idm250_user`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

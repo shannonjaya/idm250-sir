@@ -8,7 +8,7 @@ require_once 'lib/protect.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CA Manufacturing CMS</title>
+    <title> SIR Manufacturing CMS</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="./assets/logo-dark.svg" type="image/svg+xml">
 </head>
@@ -45,11 +45,20 @@ require_once 'lib/protect.php';
                 case 'delete-mpl':
                     include 'mpls/delete-mpl.php';
                     break;
+                case 'send-mpl':
+                    include 'mpls/send-mpl.php';
+                    break;
                 case 'orders':
                     include 'orders/index.php';
                     break;
                 case 'order-form':
                     include 'orders/order-form.php';
+                    break;
+                case 'delete-order':
+                    include 'orders/delete-order.php';
+                    break;
+                case 'send-order':
+                    include 'orders/send-order.php';
                     break;
                 default:
                     include 'sku/index.php';

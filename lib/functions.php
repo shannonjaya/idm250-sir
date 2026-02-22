@@ -95,6 +95,13 @@ function update_inventory_location($connection, $location, $unit_id) {
     return $stmt->execute();
 }
 
+// DELETE INVENTORY UNIT
+function delete_inventory_unit($connection, $unit_id) {
+    $stmt = $connection->prepare("DELETE FROM idm250_inventory WHERE unit_id = ?");
+    $stmt->bind_param("s", $unit_id);
+    return $stmt->execute();
+}
+
 // ------FUNCTIONS FOR MPL MANAGEMENT-----//
 
 // GET ALL MPLS
@@ -203,7 +210,9 @@ function get_mpl_units($connection, $mpl_id) {
     return $units;
 }
 
-// GET MPL DATA FOR API (HEADER + ITEMS)
+// ------ FUNCTIONS FOR MPL API -----//
+
+// GET MPL DATA BY ID FOR API (HEADER + ITEMS)
 function get_mpl_data($connection, $mpl_id) {
     $stmt = $connection->prepare(
         "SELECT m.*, mi.*, i.*, s.*
@@ -220,19 +229,170 @@ function get_mpl_data($connection, $mpl_id) {
     return $result->fetch_all(MYSQLI_ASSOC);
 }
 
+// GET MPL BY REFERENCE NUMBER FOR API
+function get_mpl_by_reference($connection, $reference_number) {
+    $stmt = $connection->prepare(
+    "SELECT m.*, COUNT(mi.unit_id) as total_units
+        FROM idm250_mpls m
+        LEFT JOIN idm250_mpl_items mi ON m.mpl_id = mi.mpl_id
+        WHERE m.reference_number = ?
+        GROUP BY m.mpl_id"
+);
+    $stmt->bind_param("s", $reference_number);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result->fetch_assoc();
+}
+
 // UPDATE MPL STATUS
-function update_mpl_status($connection, $mpl_id, $status) {
-    $stmt = $connection->prepare("UPDATE idm250_mpls SET status = ? WHERE mpl_id = ? LIMIT 1");
-    $stmt->bind_param("si", $status, $mpl_id);
+function update_mpl_status($connection, $reference_number, $status) {
+    $stmt = $connection->prepare("UPDATE idm250_mpls SET status = ? WHERE reference_number = ? LIMIT 1");
+    $stmt->bind_param("ss", $status, $reference_number);
+    
     return $stmt->execute();
 }
 
 // ------FUNCTIONS FOR ORDER MANAGEMENT-----//
+
+// GET ALL ORDERS 
 function get_all_orders($connection) {
-    $stmt = $connection->prepare("SELECT * FROM idm250_orders");
+    $stmt = $connection->prepare("SELECT o.*, COUNT(oi.unit_id) as total_units
+        FROM idm250_orders o
+        LEFT JOIN idm250_order_items oi ON o.order_id = oi.order_id
+        GROUP BY o.order_id");
     $stmt->execute();
     $result = $stmt->get_result();
     $orders = $result->fetch_all(MYSQLI_ASSOC);
 
     return $orders;
+}
+
+// GET ORDER BY ID
+function get_order($connection, $order_id) {
+    $stmt = $connection->prepare("SELECT * FROM idm250_orders WHERE order_id = ?");
+    $stmt->bind_param("i", $order_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $order = $result->fetch_assoc();
+
+    return $order;
+}
+
+// CREATE ORDER
+function create_order($connection, $data, $unit_ids) {
+    $stmt = $connection->prepare("INSERT INTO idm250_orders (order_number, ship_to_company, ship_to_street, ship_to_city, ship_to_state, ship_to_zip, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssss", $data['order_number'], $data['ship_to_company'], $data['ship_to_street'], $data['ship_to_city'], $data['ship_to_state'], $data['ship_to_zip'], $data['status']);
+    $stmt->execute();
+    
+    $order_id = $connection->insert_id;
+    $stmt = $connection->prepare("INSERT INTO idm250_order_items (order_id, unit_id) VALUES (?, ?)");
+
+    foreach ($unit_ids as $unit_id) {
+        $stmt->bind_param("ii", $order_id, $unit_id);
+        $stmt->execute();
+    }
+}
+
+// EDIT ORDER
+function edit_order($connection, $order_id, $data, $unit_ids) {
+    $check = $connection->prepare("SELECT order_id FROM idm250_orders WHERE order_id = ? AND status = 'draft'");
+    $check->bind_param("i", $order_id);
+    $check->execute();
+    $result = $check->get_result();
+    
+    if ($result->num_rows === 0) {
+        return false;
+    }
+    
+
+    $stmt = $connection->prepare("UPDATE idm250_orders SET order_number = ?, ship_to_company = ?, ship_to_street = ?, ship_to_city = ?, ship_to_state = ?, ship_to_zip = ? WHERE order_id = ? LIMIT 1");
+    $stmt->bind_param("ssssssi", $data['order_number'], $data['ship_to_company'], $data['ship_to_street'], $data['ship_to_city'], $data['ship_to_state'], $data['ship_to_zip'], $order_id);
+    $stmt->execute();
+    
+
+    $stmt = $connection->prepare("DELETE FROM idm250_order_items WHERE order_id = ?");
+    $stmt->bind_param("i", $order_id);
+    $stmt->execute();
+    
+
+    $stmt = $connection->prepare("INSERT INTO idm250_order_items (order_id, unit_id) VALUES (?, ?)");
+    foreach ($unit_ids as $unit_id) {
+        $unit_id = intval($unit_id);
+        $stmt->bind_param("ii", $order_id, $unit_id);
+        $stmt->execute();
+    }
+    
+    return true;
+}
+
+// GET ORDER UNITS
+
+function get_order_units($connection, $order_id) {
+    $stmt = $connection->prepare("SELECT unit_id FROM idm250_order_items WHERE order_id = ?");
+    $stmt->bind_param("i", $order_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $units = [];
+    while ($unit = $result->fetch_assoc()) {
+        $units[] = $unit['unit_id'];
+    }
+    return $units;
+}
+
+// DELETE ORDER
+function delete_order($connection, $order_id) {
+    $stmt = $connection->prepare("DELETE FROM idm250_order_items WHERE order_id = ?");
+    $stmt->bind_param("i", $order_id);
+    $stmt->execute();
+    
+    $stmt = $connection->prepare("DELETE FROM idm250_orders WHERE order_id = ? LIMIT 1");
+    $stmt->bind_param("i", $order_id);
+    if ($stmt->execute()) {
+        return true;
+    }
+    return false;
+}
+
+// ------ FUNCTIONS FOR ORDER API -----//
+
+// GET ORDER DATA BY ID FOR API (HEADER + ITEMS)
+function get_order_data($connection, $order_id) {
+    $stmt = $connection->prepare(
+        "SELECT o.*, oi.*, i.*, s.*
+        FROM idm250_orders o
+        JOIN idm250_order_items oi ON o.order_id = oi.order_id
+        JOIN idm250_inventory i ON oi.unit_id = i.unit_id
+        JOIN idm250_sku s ON i.sku_id = s.id
+        WHERE o.order_id = ?"
+    );
+    $stmt->bind_param("i", $order_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+// GET ORDER BY ORDER NUMBER FOR API
+function get_order_by_number($connection, $order_number) {
+    $stmt = $connection->prepare("SELECT * FROM idm250_orders WHERE order_number = ?");
+    $stmt->bind_param("i", $order_number);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result->fetch_assoc();
+}
+
+// UPDATE ORDER STATUS
+function update_order_status($connection, $order_number, $status) {
+    $stmt = $connection->prepare("UPDATE idm250_orders SET status = ? WHERE order_number = ? LIMIT 1");
+    $stmt->bind_param("ss", $status, $order_number);
+    return $stmt->execute();
+}
+
+// UPDATE ORDER SHIPPED AT 
+function update_order_shipped_at($connection, $order_number, $shipped_at) {
+    $stmt = $connection->prepare("UPDATE idm250_orders SET shipped_at = ? WHERE order_number = ? LIMIT 1");
+    $stmt->bind_param("ss", $shipped_at, $order_number);
+    return $stmt->execute();
 }
