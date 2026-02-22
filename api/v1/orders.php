@@ -29,29 +29,34 @@ if ($method === 'POST') {
 
     $data = json_decode($raw_input, true);
 
-    $reference_number = $data['reference_number'] ?? '';
-    $items = $data['items'] ?? [];
+    $action = $data['action'] ?? '';
+    $order_number = $data['order_number'] ?? '';
+    $shipped_at = $data['shipped_at'] ?? '';
 
-    if (empty($reference_number)) {
+    if (empty($action)) {
         http_response_code(400);
-        echo json_encode(['error' => 'Missing reference number']);
+        echo json_encode(['error' => 'Missing action']);
         exit;
     }
 
-    if (empty($items)) {
+    if (empty($order_number)) {
         http_response_code(400);
-        echo json_encode(['error' => 'No units selected']);
+        echo json_encode(['error' => 'Missing order number']);
+        exit;
+    }
+
+    if (empty($shipped_at)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Missing shipment date']);
         exit;
     }
 
     echo json_encode([
-        'success' => true,
-        'message' => 'MPL received',
-        'reference' => $reference_number,
-        'units_count' => count($items)
+        'action' => $action,
+        'order_number' => $order_number,
+        'shipped_at' => $shipped_at
     ]);
 } else {
     http_response_code(405);
     echo json_encode(['error' => 'Method Not Allowed']);
 }
-

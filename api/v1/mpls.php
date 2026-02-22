@@ -29,8 +29,14 @@ if ($method === 'POST') {
 
     $data = json_decode($raw_input, true);
 
+    $action = $data['action'] ?? '';
     $reference_number = $data['reference_number'] ?? '';
-    $items = $data['items'] ?? [];
+
+    if (empty($action)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Missing action']);
+        exit;
+    }
 
     if (empty($reference_number)) {
         http_response_code(400);
@@ -38,17 +44,9 @@ if ($method === 'POST') {
         exit;
     }
 
-    if (empty($items)) {
-        http_response_code(400);
-        echo json_encode(['error' => 'No units selected']);
-        exit;
-    }
-
     echo json_encode([
-        'success' => true,
-        'message' => 'MPL received',
-        'reference' => $reference_number,
-        'units_count' => count($items)
+        'action' => $action,
+        'reference_number' => $reference_number
     ]);
 } else {
     http_response_code(405);

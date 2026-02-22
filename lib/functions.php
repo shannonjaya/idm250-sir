@@ -254,6 +254,7 @@ function create_order($connection, $data, $unit_ids) {
     }
 }
 
+// DELETE ORDER
 function delete_order($connection, $order_id) {
     $stmt = $connection->prepare("DELETE FROM idm250_order_items WHERE order_id = ?");
     $stmt->bind_param("i", $order_id);
@@ -267,6 +268,7 @@ function delete_order($connection, $order_id) {
     return false;
 }
 
+// EDIT ORDER
 function edit_order($connection, $order_id, $data, $unit_ids) {
     $check = $connection->prepare("SELECT order_id FROM idm250_orders WHERE order_id = ? AND status = 'draft'");
     $check->bind_param("i", $order_id);
