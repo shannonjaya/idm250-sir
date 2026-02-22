@@ -1,4 +1,4 @@
-<?php
+<?php // RECEIVES MPL NOTIFS FROM WMS
 
 ob_start();
 
@@ -44,10 +44,36 @@ if ($method === 'POST') {
         exit;
     }
 
-    echo json_encode([
-        'action' => $action,
-        'reference_number' => $reference_number
-    ]);
+    $mpl = get_mpl_by_reference($connection, $reference_number);
+
+    if (!$mpl)  {
+        http_response_code(404);
+        echo json_encode(['error' => 'MPL not found']);
+        exit;
+    }
+
+    // "The CMS API updates its MPL status to 'confirmed' and moves each unit's location to 'warehouse'"
+
+    if ($action === 'confirm') {
+        update_mpl_status($connection, $reference_number, 'confirmed');
+
+        $unit_ids = get_mpl_units($connection, $mpl['mpl_id']);
+
+        foreach ($unit_ids as $unit_id) {
+            update_inventory_location($connection, 'warehouse', $unit_id);
+        }
+
+        http_response_code(200);
+        echo json_encode([
+            'success' => true,
+            'action' => $action,
+            'reference_number' => $reference_number,
+            'units_updated' => count($unit_ids)
+        ]);
+    } else {
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid action']);
+    }
 } else {
     http_response_code(405);
     echo json_encode(['error' => 'Method Not Allowed']);

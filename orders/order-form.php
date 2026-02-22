@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="form-item">
             <label for="order_number">Order Number</label>
-            <input type="number" id="order_number" name="order_number" placeholder="000000" value="<?= ($order['reference_number']) ?? ''; ?>" required>
+            <input type="number" id="order_number" name="order_number" placeholder="000000" value="<?= ($order['order_number']) ?? ''; ?>" required>
             <?php if (isset($order_error)): ?>
                 <p class="error"><?= htmlspecialchars($order_error) ?></p>
             <?php endif; ?>
