@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </fieldset>
 
     <div class="btn-wrapper">
-        <a href="index.php?view=mpls" class="primary-btn">Cancel</a>
+        <a href="index.php?view=orders" class="primary-btn">Cancel</a>
         <button type="submit" class="primary-btn"><?php echo $order_id ? 'Update' : 'Create'; ?> Order</button>
     </div>
 
