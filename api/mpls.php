@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require_once "../lib/db-connect.php";
 require_once "../lib/auth.php";
-require_once "../lib/functions.php";
 
 ob_end_clean();
 

@@ -21,7 +21,9 @@ function check_api_key($env) {
 }
 
 // SESSIONS
-session_start();
+if (!defined('API_REQUEST') && session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 $USERS = [
     [
