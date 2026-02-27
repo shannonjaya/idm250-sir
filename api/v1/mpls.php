@@ -55,7 +55,7 @@ if ($method === 'POST') {
     // "The CMS API updates its MPL status to 'confirmed' and moves each unit's location to 'warehouse'"
 
     if ($action === 'confirm') {
-        update_mpl_status($connection, $reference_number, 'confirmed');
+        update_mpl_status($connection, $mpl['mpl_id'], 'confirmed');
 
         $unit_ids = get_mpl_units($connection, $mpl['mpl_id']);
 

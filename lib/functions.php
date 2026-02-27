@@ -246,9 +246,9 @@ function get_mpl_by_reference($connection, $reference_number) {
 }
 
 // UPDATE MPL STATUS
-function update_mpl_status($connection, $reference_number, $status) {
-    $stmt = $connection->prepare("UPDATE idm250_mpls SET status = ? WHERE reference_number = ? LIMIT 1");
-    $stmt->bind_param("ss", $status, $reference_number);
+function update_mpl_status($connection, $mpl_id, $status) {
+    $stmt = $connection->prepare("UPDATE idm250_mpls SET status = ? WHERE mpl_id = ? LIMIT 1");
+    $stmt->bind_param("si", $status, $mpl_id);
     
     return $stmt->execute();
 }

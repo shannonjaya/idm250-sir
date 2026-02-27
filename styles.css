@@ -38,6 +38,8 @@
   --border-radius-full: 100px;
   --border-dotted: 1px dotted var(--gray);
   --border: 1px solid var(--gray);
+
+  --transition: all 0.5s cubic-bezier(0,.75,.4,.99)
 }
 
 * {
@@ -78,15 +80,6 @@ label {
   justify-content: space-between;
 }
 
-.error {
-  font-family: var(--font-sans);
-  text-transform: none;
-  font-weight: var(--font-weight-regular);
-  color: rgb(255, 58, 58);
-  font-size: calc(var(--font-small) * 0.95);
-  margin: 0;
-}
-
 /* UI COMPONENTS */
 
 a,
@@ -125,7 +118,7 @@ hr {
   font-family: var(--font-sans);
   font-size: calc(var(--font-small) * 0.95);
   font-weight: var(--font-weight-regular);
-  transition: all ease 0.3s;
+  transition: var(--transition);
 }
 
 .tooltip:hover .tooltip-text {
@@ -180,7 +173,7 @@ ul.sidebar-menu {
   cursor: pointer;
   padding: calc(var(--rhythm) * 0.5);
   fill: currentColor;
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .sidebar-link:hover {
@@ -218,7 +211,7 @@ ul.sidebar-menu {
 
 .primary-btn {
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -227,7 +220,7 @@ ul.sidebar-menu {
   font-family: var(--font-mono);
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition);
   position: relative;
   top: 0;
   right: 0;
@@ -242,7 +235,7 @@ ul.sidebar-menu {
 .secondary-btn {
   color: var(--primary-color);
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: color var(--transition);
   position: relative;
 }
 
@@ -256,7 +249,7 @@ ul.sidebar-menu {
   background-color: var(--primary-color);
   transform: scaleX(0);
   transform-origin: left;
-  transition: all 0.3s ease;
+  transition: all var(--transition);
 }
 
 .secondary-btn:hover::after {
@@ -267,7 +260,7 @@ ul.sidebar-menu {
   color: var(--foreground-color);
   cursor: pointer;
   padding: calc(var(--rhythm) * 0.5);
-  transition: all 0.3s ease;
+  transition: var(--transition);
   position: relative;
 }
 
@@ -327,12 +320,12 @@ tr {
   display: table;
   width: 100%;
   table-layout: fixed;
+  border-bottom: var(--border-dotted);
 }
 
 td,
 th {
   padding: calc(var(--rhythm) * 1) calc(var(--rhythm) * 1);
-  border-bottom: var(--border-dotted);
   display: table-cell;
 }
 
@@ -419,7 +412,7 @@ input[type="date"] {
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
-  transition: all ease 0.3s;
+  transition: var(--transition);
   cursor: pointer;
 }
 
@@ -447,7 +440,6 @@ option {
   flex-direction: column;
   gap: calc(var(--rhythm) * 0.5);
   width: 100%;
-  padding-bottom: 40px;
 }
 
 fieldset {
@@ -473,4 +465,52 @@ legend {
   max-width: 500px;
   margin: 0 auto;
   padding-top: 60px;
+}
+
+
+/* ERROR */
+.error {
+  font-family: var(--font-sans);
+  text-transform: none;
+  font-weight: var(--font-weight-regular);
+  color: rgb(255, 58, 58);
+  font-size: calc(var(--font-small) * 0.95);
+  margin: 0;
+}
+
+.toast {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--rhythm) * 0.5);
+  bottom: var(--rhythm);
+  right: var(--rhythm);
+  background: var(--dark-gray);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: calc(var(--rhythm) * 0.5);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-size: calc(var(--font-small) * 0.95);
+
+  opacity: 0;
+  transform: translateY(50px);
+  transition: var(--transition);
+}
+
+.toast-container {
+  z-index: 50;
+  position: fixed;
+  right: var(--rhythm);
+  bottom: var(--rhythm);
+  width: fit-content;
+}
+
+.toast.open {
+  margin-top: 0.5rem;
+  transform: translateY(0);
+  opacity: 1;
 }

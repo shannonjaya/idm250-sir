@@ -13,7 +13,10 @@ require_once 'lib/protect.php';
     <link rel="icon" href="./assets/logo-dark.svg" type="image/svg+xml">
 </head>
 <body>
-    <?php include_once 'lib/db-connect.php'; ?>
+    <?php
+    include_once 'lib/db-connect.php';
+    require 'includes/toast.php';
+    ?>
     <main class="main-content">
          <?php
             $view = $_GET['view'] ?? 'sku';

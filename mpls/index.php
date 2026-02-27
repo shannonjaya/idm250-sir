@@ -28,7 +28,7 @@ $mpls = get_all_mpls($connection);
                 <td style="margin: auto; text-align: center;"><?=$mpl['total_units']; ?></td>
                 <td>
                     <p class="highlight<?php
-                        if ($mpl['status'] === 'confirmed') { echo "-green"; }
+                        if ($mpl['status'] === 'confirmed') { echo "-green"; } if ($mpl['status'] === 'sent') { echo "-yellow"; }
                     ?>">
                         <?=$mpl['status']; ?>
                     </p>
