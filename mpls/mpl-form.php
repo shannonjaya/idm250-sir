@@ -5,6 +5,10 @@ $mpl = $mpl_id ? get_mpl($connection, $mpl_id) : [];
 
 $all_inventory = get_all_inventory_units($connection);
 
+$internal_inventory = array_filter($all_inventory, function($unit) {
+    return $unit['location'] === 'internal';
+});
+
 if ($_POST) {
     $selected_units = $_POST['unit_ids'] ?? [];
 } else {
@@ -95,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($all_inventory as $unit): ?>
+                        <?php foreach($internal_inventory as $unit): ?>
                             <tr>
                                 <td><input type="checkbox" class="unit-checkbox" name="unit_ids[]" value="<?=$unit['unit_id']; ?>" <?php if (in_array($unit['unit_id'], $selected_units)) { echo 'checked'; } ?>></td>
                                 <td><?=$unit['unit_id']; ?></td>
@@ -114,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </p></td>
                             </tr>
                         <?php endforeach; ?>
-                        <?php if (empty($all_inventory)): ?>
+                        <?php if (empty($internal_inventory)): ?>
                             <tr>
                                 <td colspan="5" class="empty-table" style="padding: 2rem;">
                                     <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">

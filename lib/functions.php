@@ -61,8 +61,7 @@ function delete_sku ($connection, $id) {
 function get_all_inventory_units($connection) {
     $sql = "SELECT i.*, s.sku, s.description, s.uom_primary
             FROM idm250_inventory i
-            JOIN idm250_sku s ON i.sku_id = s.id
-            WHERE i.location = 'internal'";
+            JOIN idm250_sku s ON i.sku_id = s.id";
     
     $stmt = $connection->prepare($sql);
     $stmt->execute();
