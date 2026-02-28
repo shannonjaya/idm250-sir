@@ -34,15 +34,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <h1>Login</h1>
 
       <form method="POST">
-        <div class="form-item">
-          <label>Email</label>
-          <input type="email" name="email" required>
-        </div>
+        <fieldset class="row">
+          <div class="form-item">
+            <label>Email</label>
+            <input type="email" name="email" required>
+          </div>
+        </fieldset>
 
-        <div class="form-item">
-          <label>Password</label>
-          <input type="password" name="password" required>
-        </div>
+        <fieldset class="row">
+          <div class="form-item">
+            <label>Password</label>
+            <input type="password" name="password" required>
+          </div>
+        </fieldset>
 
         <?php if ($error): ?>
           <p style="color:red;"><?= $error ?></p>
