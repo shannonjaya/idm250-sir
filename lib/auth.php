@@ -25,40 +25,43 @@ if (!defined('API_REQUEST') && session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$USERS = [
-    [
-        'email' => 'ingrid@sir.com',
-        'password' => '$2y$10$ykUfY/1kienmY3m.STG18OpHcBmKrT6e64mmhLg.zJnWk.7cYz.r.'
-    ],
-    [
-        'email' => 'riley@sir.com',
-        'password' => '$2y$10$8PwmuSfdboZoNhbV3z6vleZekdWcfUr4UScZeZrpnyLBpPwvuyyuq'
-    ],
-    [
-        'email' => 'shannon@sir.com',
-        'password' => '$2y$10$bBRUDQVLWrDZCj.Zj.I.0eIe6JSN2ODjzbYahrTh7Kum.eM1C07Iy'
-    ]
-];
-
 function login_user($email, $password) {
-  global $USERS;
+  global $connection;
 
-  foreach ($USERS as $user) {
-    if (
-      $user['email'] === $email &&
-      password_verify($password, $user['password'])
-    ) {
-      $_SESSION['user'] = [
-        'email' => $email
-      ];
-      return true;
-    }
+  $stmt = $connection->prepare("
+      SELECT id, email, password_hash
+      FROM idm250_user
+      WHERE email = ?
+      LIMIT 1
+  ");
+
+  if (!$stmt) {
+    return false;
   }
+
+  $stmt->bind_param('s', $email);
+  $stmt->execute();
+
+  $result = $stmt->get_result();
+
+  if ($result && $result->num_rows === 1) {
+
+      $user = $result->fetch_assoc();
+
+      if (password_verify($password, $user['password_hash'])) {
+
+          $_SESSION['user_id']    = $user['id'];
+          $_SESSION['user_email'] = $user['email'];
+
+          return true;
+      }
+  }
+
   return false;
 }
 
 function is_logged_in() {
-  return isset($_SESSION['user']);
+  return isset($_SESSION['user_id']);
 }
 
 function logout_user() {

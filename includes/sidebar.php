@@ -1,6 +1,6 @@
 <?php
 $activeView = $_GET['view'] ?? 'sku';
-$userEmail = $_SESSION['user']['email'] ?? null;
+$userEmail = $_SESSION['user_email'] ?? null;
 ?>
 
 <aside class="sidebar">
