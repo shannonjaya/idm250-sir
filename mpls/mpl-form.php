@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <header class="main-header">
-    <h1 class="main-heading"><?php echo $mpl_id ? 'Edit' : 'Create'; ?> Material Packing List</h1>
+    <h1 class="main-heading"><?php echo $mpl_id ? 'Edit' : 'Create'; ?> Master Packing List</h1>
 </header>
 
 <form method="post">
