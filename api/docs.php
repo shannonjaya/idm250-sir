@@ -1,6 +1,4 @@
 <?php
-// Simple API documentation page for the project's API endpoints
-// Place this file in the api/ folder so it can be opened in a browser.
 
 ?><!doctype html>
 <html lang="en">
