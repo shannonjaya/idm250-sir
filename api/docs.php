@@ -23,7 +23,7 @@
     <h2>Authentication & Headers</h2>
     <ul>
         <li><strong>Content-Type:</strong> application/json</li>
-        <li><strong>X-API-Key:</strong> Required — <code>sir-4d-api-2026</code> (checked by <code>check_api_key()</code>)</li>
+        <li><strong>X-API-Key:</strong> Required - [your API key here] (checked by <code>check_api_key()</code>)</li>
         <li>CORS: <code>Access-Control-Allow-Origin: *</code> and POST/OPTIONS supported</li>
     </ul>
 
