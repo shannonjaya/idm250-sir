@@ -1,10 +1,14 @@
 <?php
 require_once './lib/functions.php';
 $skus = get_all_skus($connection);
+$sku_count = count($skus);
 ?>
 
 <header class="main-header">
-    <h1 class="main-heading">SKU Management</h1>
+    <div>
+        <h1 class="main-heading">SKU Management</h1>
+        <p class="count"><?=$sku_count;?> SKUs</p>
+    </div>
     <a href="?view=sku-form" class="primary-btn">Create SKU</a>
 </header>
 

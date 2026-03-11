@@ -209,6 +209,10 @@ ul.sidebar-menu {
   margin-bottom: var(--rhythm);
 }
 
+.count {
+  color: var(--light-gray);
+}
+
 .primary-btn {
   background: rgba(255, 255, 255, 0.2);
   border-radius: var(--border-radius);

@@ -1,10 +1,14 @@
 <?php
 require_once './lib/functions.php';
 $all_inventory = get_all_inventory_units($connection);
+$inventory_count = count($all_inventory);
 ?>
 
 <header class="main-header">
-    <h1 class="main-heading">Inventory Management</h1>
+    <div>
+        <h1 class="main-heading">Inventory Management</h1>
+        <p class="count"><?=$inventory_count;?> Unit<?=$inventory_count === 1 ? '' : 's'; ?></p>
+    </div>
 </header>
 
 <form id="mpl-form" method="post" action="?view=create-mpl">

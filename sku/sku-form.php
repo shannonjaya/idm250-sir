@@ -96,7 +96,7 @@ $sku = $id ? get_sku($connection, $id) : [];
 
     <div class="btn-wrapper">
         <a href="index.php?view=sku" class="primary-btn">Cancel</a>
-        <button type="submit" class="primary-btn"><?php echo isset($_GET['id']) ? 'Edit ' : 'Create '; ?>SKU</button>
+        <button type="submit" class="primary-btn"><?php echo isset($_GET['id']) ? 'Save ' : 'Create '; ?>SKU</button>
     </div>
 </form>
 
