@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="form-item">
             <label for="reference_number">Reference Number</label>
-            <input type="number" id="reference_number" name="reference_number" placeholder="000000" value="<?= ($mpl['reference_number']) ?? ''; ?>" required>
+            <input type="number" min="0" id="reference_number" name="reference_number" placeholder="000000" value="<?= ($mpl['reference_number']) ?? ''; ?>" required>
             <?php if (isset($ref_error)): ?>
                 <p class="error"><?= htmlspecialchars($ref_error) ?></p>
             <?php endif; ?>
@@ -73,12 +73,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="form-item">
             <label for="trailer_number">Trailer Number</label>
-            <input type="number" id="trailer_number" name="trailer_number" placeholder="000000" value="<?= ($mpl['trailer_number']) ?? ''; ?>" required>
+            <input type="number" min="0" id="trailer_number" name="trailer_number" placeholder="000000" value="<?= ($mpl['trailer_number']) ?? ''; ?>" required>
         </div>
 
         <div class="form-item">
             <label for="expected_arrival">Expected Arrival</label>
-            <input type="date" id="expected_arrival" name="expected_arrival" value="<?= ($mpl['expected_arrival']) ?? ''; ?>" required>
+            <input type="date" id="expected_arrival" name="expected_arrival" value="<?= ($mpl['expected_arrival']) ?? ''; ?>" min="<?= date('Y-m-d'); ?>" required>
         </div>
     </fieldset>
 
