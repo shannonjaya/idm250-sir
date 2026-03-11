@@ -127,9 +127,5 @@
         <li>All endpoints return JSON and use HTTP status codes to indicate success or failure.</li>
         <li>Inspect the code in <strong>/lib/</strong> for DB and auth helpers referenced by the API.</li>
     </ul>
-
-    <footer>
-        <p>File generated: api/docs.php — edit this file to expand endpoint documentation.</p>
-    </footer>
 </body>
 </html>
